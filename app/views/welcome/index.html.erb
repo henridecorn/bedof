@@ -1,0 +1,51 @@
+<h1>Yoooooo</h1>
+<p>Je suis une appli qui consolide et scrape le web pour assembler une BDD des organismes de formation en France.</p>
+<p>
+	Je contiens actuellement
+	<strong>
+		<%= Trainer.all.count %>
+		sociétés,
+		<%= Trainer.where.not(nom_dirigeant: nil).count %>
+		dirigeants
+		(<%= Trainer.where.not(nom_dirigeant: nil).where("code_postal like ?", "75%").count %> à Paris)
+		,
+		<%= Trainer.where(crawled_for_email: true).count %>
+		crawls, 
+		et
+		<%= Trainer.where.not(email_dirigeant: [nil, '']).count %>
+		emails validés.
+	</strong>
+</p>	
+<p>Voici quelques actions :</p>
+<ul>
+	<li><%= link_to 'Voir la liste des OF', trainers_path %></li>
+	<li><%= link_to "Télécharger au format CSV", trainers_path(format: "csv") %></li>
+	<li>
+		<%= form_tag search_trainers_path, :method => 'get' do %>
+			Rechercher un OF par SIREN :
+			<%= number_field_tag :siren, params[:siren] %>
+			<%= submit_tag "Rechercher", :name => nil %>
+		<% end %>
+	</li>
+	<li>
+		<%= form_tag import_official_trainers_path, multipart: true do %>
+			Importer depuis "Liste Officielle" via "Kimono" (CSV avec siren, sigle, effectif) :
+			<%= file_field_tag :file %>
+			<%= submit_tag "Import" %>
+		<% end %>
+	</li>
+	<li>
+		<%= form_tag import_societe_trainers_path, multipart: true do %>
+			Importer depuis "Societe.com" via "Import.io" (CSV avec _pageUrl, rens_jur, dirigeant) :
+			<%= file_field_tag :file %>
+			<%= submit_tag "Import" %>
+		<% end %>
+	</li>
+	<li>
+		<%= form_tag crawl_for_emails_trainers_path, :method => 'get' do %>
+			Calculer les mails (Scope = Paris) :
+			<%= number_field_tag :crawls_number, params[:crawls_number] %>
+			<%= submit_tag "Calculer", :name => nil %>
+		<% end %>
+	</li>
+</ul>

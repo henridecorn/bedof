@@ -1,0 +1,73 @@
+<h1><%= @trainer.sigle %></h1>
+
+<p>
+  <strong>Siren:</strong>
+  <%= @trainer.siren %>
+</p>
+
+<p>
+  <strong>Sigle:</strong>
+  <%= @trainer.sigle %>
+</p>
+
+<p>
+  <strong>Lien Societe.com:</strong>
+  <%= link_to @trainer.lien_societe, @trainer.lien_societe, target: "_blank" %>
+</p>
+
+<p>
+  <strong>Dénomination:</strong>
+  <%= @trainer.denomination %>
+</p>
+
+<p>
+  <strong>Effectif:</strong>
+  <%= @trainer.effectif %>
+</p>
+
+<p>
+  <strong>Code postal:</strong>
+  <%= @trainer.code_postal %>
+</p>
+
+<p>
+  <strong>Adresse:</strong>
+  <%= @trainer.adresse %>
+</p>
+
+<p>
+  <strong>Activité:</strong>
+  <%= @trainer.activite %>
+</p>
+
+<p>
+  <strong>Forme Juridique:</strong>
+  <%= @trainer.forme_juridique %>
+</p>
+
+<p>
+  <strong>Date de Création:</strong>
+  <%= @trainer.date_de_creation %>
+</p>
+
+<p>
+  <strong>Sexe du Dirigeant:</strong>
+  <%= @trainer.sexe_dirigeant %>
+</p>
+
+<p>
+  <strong>Nom du dirigeant:</strong>
+  <%= @trainer.nom_dirigeant %>
+</p>
+
+<p>
+  <strong>Email du dirigeant:</strong>
+  <%= @trainer.email_dirigeant %>
+</p>
+
+<p>
+  <%= @trainer.crawled_for_email ? "Crawlé" : "Non Crawlé" %>
+</p>
+
+<%= link_to 'Edit', edit_trainer_path(@trainer) %> |
+<%= link_to 'Back', trainers_path %>

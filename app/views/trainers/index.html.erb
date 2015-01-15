@@ -1,0 +1,38 @@
+<%= notice %>
+
+<h1>
+  Liste des Organismes de Formation
+</h1>
+50 résultats par page, avec emails en haut
+<p>
+  <%= link_to "Retour à l'accueil", root_path %>
+  <%= link_to "Télécharger au format CSV", trainers_path(format: "csv") %>
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Siren</th>
+      <th>Sigle</th>
+      <th>Email Dirigeant</th>
+      <th>Code Postal</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trainers.each do |trainer| %>
+      <tr>
+        <td><%= trainer.siren %></td>
+        <td><%= trainer.sigle.truncate(50) %></td>
+        <td><%= trainer.email_dirigeant %></td>
+        <td><%= trainer.code_postal %></td>
+        <td><%= link_to 'Voir', trainer %></td>
+        <td><%= link_to 'Modifier', edit_trainer_path(trainer) %></td>
+        <td><%= link_to 'Supprimer', trainer, method: :delete, data: { confirm: 'Es-tu sur?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= will_paginate @trainers %>
+
