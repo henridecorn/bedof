@@ -1,5 +1,5 @@
 class TrainersController < ApplicationController
-  before_action :set_trainer, only: [:show, :edit, :update, :destroy]
+  before_action :set_trainer, only: [:show, :edit, :update, :destroy, :skip]
 
   # GET /trainers
   # GET /trainers.json
@@ -59,6 +59,12 @@ class TrainersController < ApplicationController
   def search
     @trainer = Trainer.where(siren: params[:siren]).first
     redirect_to @trainer
+  end
+
+  def skip
+    @trainer.crawled_for_email = true
+    @trainer.save
+    redirect_to root_path, notice: @trainer.siren + " a été sauté"
   end
 
 

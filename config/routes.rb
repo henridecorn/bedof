@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       get :crawl_for_emails
       get :search
     end
+    member do
+      get :skip
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

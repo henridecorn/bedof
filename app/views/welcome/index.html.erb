@@ -1,3 +1,5 @@
+<%= notice %>
+
 <h1>Yoooooo</h1>
 <p>Je suis une appli qui consolide et scrape le web pour assembler une BDD des organismes de formation en France.</p>
 <p>
@@ -48,4 +50,5 @@
 			<%= submit_tag "Calculer", :name => nil %>
 		<% end %>
 	</li>
+	<li><%= link_to "Sauter le dernier OF", skip_trainer_path(Trainer.where.not(nom_dirigeant: nil, crawled_for_email: true).where("code_postal like ?", "75%").first) %> (en cas de bug)</li>
 </ul>

@@ -1,4 +1,4 @@
-== BEDOF
+== bédof
 
 Cette application consolide et crawl le web pour constituer une base de données (BDD)
 avec adresses emails des organismes de formation (OF) en France.
@@ -9,6 +9,6 @@ BEDOF travaille avec 4 sources de données :
 
 * Societe.com, crawlé par import.io
 
-* BING, crawlé par BEDOF
+* BING, crawlé par bédof
 
-* QuickEmailVerification, appelé par BEDOF
+* QuickEmailVerification, appelé par bédof
