@@ -71,6 +71,7 @@ class Trainer < ActiveRecord::Base
 		while i <= crawls_number.to_i do
 			trainer = trainers[i-1]
 
+			# track progress in console
 			logger.info "Request #{i} is SIREN #{trainer.siren}"
 
 			# find the domain of the company using Bing's first search result on query 'sigle'

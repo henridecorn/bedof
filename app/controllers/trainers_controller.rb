@@ -53,7 +53,7 @@ class TrainersController < ApplicationController
 
   def crawl_for_emails
     validated_emails_count = Trainer.crawl_for_emails(params[:crawls_number])
-    redirect_to trainers_url, notice: validated_emails_count.to_s + " emails ajoutés."
+    redirect_to trainers_url, notice: validated_emails_count.to_s + " emails ajoutés sur " + params[:crawls_number].to_s
   end
 
   def search

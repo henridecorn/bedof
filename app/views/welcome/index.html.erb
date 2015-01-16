@@ -1,6 +1,6 @@
 <%= notice %>
 
-<h1>Yoooooo</h1>
+<h1>Yoooooo. Mon nom est bédof.</h1>
 <p>Je suis une appli qui consolide et scrape le web pour assembler une BDD des organismes de formation en France.</p>
 <p>
 	Je contiens actuellement
@@ -46,7 +46,7 @@
 	<li>
 		<%= form_tag crawl_for_emails_trainers_path, :method => 'get' do %>
 			Calculer les mails (Scope = Paris) :
-			<%= number_field_tag :crawls_number, params[:crawls_number] %>
+			<%= number_field_tag :crawls_number, 100 %>
 			<%= submit_tag "Calculer", :name => nil %>
 		<% end %>
 	</li>
