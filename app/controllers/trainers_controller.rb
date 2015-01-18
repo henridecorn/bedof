@@ -43,17 +43,17 @@ class TrainersController < ApplicationController
 
   def import_official
     Trainer.import_official(params[:file])
-    redirect_to trainers_url, notice: "Liste importée."
+    redirect_to root_path, notice: "Liste importée."
   end
 
   def import_societe
     Trainer.import_societe(params[:file])
-    redirect_to trainers_url, notice: "Societés importées."
+    redirect_to root_path, notice: "Societés importées."
   end
 
   def crawl_for_emails
     validated_emails_count = Trainer.crawl_for_emails(params[:crawls_number])
-    redirect_to trainers_url, notice: validated_emails_count.to_s + " emails ajoutés sur " + params[:crawls_number].to_s
+    redirect_to root_path, notice: validated_emails_count.to_s + " emails ajoutés sur " + params[:crawls_number].to_s
   end
 
   def search
