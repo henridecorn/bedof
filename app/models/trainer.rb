@@ -65,8 +65,8 @@ class Trainer < ActiveRecord::Base
 		i = 1
 		validated_emails_count = 0
 
-		# list OFs that have a dirigeant, that haven't already been crawled, and that are in Paris
-		trainers = Trainer.where.not(nom_dirigeant: nil, crawled_for_email: true).where("code_postal like ?", "75%")
+		# list OFs that have a dirigeant, that haven't already been crawled, and that are in Paris in priority
+		trainers = Trainer.where.not(nom_dirigeant: nil, crawled_for_email: true).select("*, CASE WHEN trainers.code_postal like '75%' THEN 0 ELSE 1 END AS trainers_order").order("trainers_order ASC").limit(1000)
 
 		while i <= crawls_number.to_i do
 			trainer = trainers[i-1]

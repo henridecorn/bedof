@@ -45,10 +45,10 @@
 	</li>
 	<li>
 		<%= form_tag crawl_for_emails_trainers_path, :method => 'get' do %>
-			Calculer les mails (Scope = Paris) :
+			Calculer les mails (Priorité = Paris) :
 			<%= number_field_tag :crawls_number, 100 %>
 			<%= submit_tag "Calculer", :name => nil %>
 		<% end %>
 	</li>
-	<li><%= link_to "Sauter le dernier OF", skip_trainer_path(Trainer.where.not(nom_dirigeant: nil, crawled_for_email: true).where("code_postal like ?", "75%").first) %> (en cas de bug)</li>
+	<li><%= link_to "Sauter le dernier OF", skip_trainer_path(Trainer.where.not(nom_dirigeant: nil, crawled_for_email: true).select("*, CASE WHEN trainers.code_postal like '75%' THEN 0 ELSE 1 END AS trainers_order").order("trainers_order ASC").first) %> (en cas de bug)</li>
 </ul>
