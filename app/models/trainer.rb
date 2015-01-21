@@ -94,28 +94,35 @@ class Trainer < ActiveRecord::Base
 			i+=1
 		end
 
+
+
 		return validated_emails_count
 	end
 
+	# extracts the domain name using BING's first search result.
+	# sends nil if can't find it.
 	def find_domain
-		# lookup the URL of BING's first search result
 		doc = Nokogiri::HTML(open('http://www.bing.com/search?' + {q: self.sigle}.to_query))
-		url = doc.css('.b_algo cite').first.content
+		url_block = doc.css('.b_algo cite').first
 
-		# extract domain
-		md = /\.(.*?\.[[:alpha:]]{2,4})($|\/| ›)/.match(url)
-		if md
-			domain = md[1]
-		else
-			domain = nil
-		end
+		return nil if url_block.nil?
 
-		return domain
+		md = /\.(.*?\.[[:alpha:]]{2,4})($|\/| ›)/.match(url_block.content)
+
+		return nil if md.nil?
+
+		return md[1]
 	end
 
 	def self.try_address(email)
 		# call QuickEmailVerification API
-		doc = open("http://api.quickemailverification.com/v1/verify?apikey=09f7ff4254cb0fca02a614bd12611ed94585ab4fa90b04a7476e31c8381c&email=" + email)
+		begin
+			doc = open("http://api.quickemailverification.com/v1/verify?apikey=09f7ff4254cb0fca02a614bd12611ed94585ab4fa90b04a7476e31c8381c&email=" + email)
+		rescue Net::ReadTimeout
+			logger.info "QuickEmailVerification TimeOut"
+			return "TimeOut"
+		end
+
 		
 		# convert to hash
 		response = JSON.parse(doc.read)
